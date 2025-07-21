@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Adom Baptist {% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+  <div class="container-fluid">
+    <!-- Hamburger for small/medium -->
+    <button class="btn d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+      <i class="fas fa-bars fa-lg" style="color: #0C2E60;"></i>
+    </button>
+
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.home') }}">
+      <img src="{{ url_for('static', filename='images/brain.jpg') }}" alt="Logo" width="40" class="me-2">
+      <div class="d-flex align-items-baseline fs-4" style="color: #0C2E60;">
+        <strong class="me-1">Adom Baptist Church</strong>
+      </div>
+    </a>
+    <div class="d-flex align-items-center ms-auto" style="color: #0C2E60;">
+      <a href="{{ url_for('main.home') }}" class="btn btn-outline-primary me-3"><i></i>Home</a>
+      <a href="#" class="btn btn-outline-primary me-3"><i></i>About</a>
+      <a href="#" class="btn btn-outline-primary me-3"><i></i>Sermon</a>
+      <a href="{{ url_for('main.contact') }}" class="btn btn-outline-primary me-3"><i></i>Contact</a>
+    </div>
+  </div>
+</nav>     
+
+<!-- Main Content -->
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+
+<!-- Footer -->
+<footer class="bg-light py-5" style="color: #0C2E60;">
+  <div class="container d-flex flex-wrap justify-content-between">
+    <div class="mb-4">
+        <!-- adom baptist details and location -->
+      <p><i class="fa fa-map-marker-alt"></i> <strong>Location: Ahwerase - Akuapem</strong><br> After the Ahwerase JHS Park.</p>
+      <p><i class="fa fa-phone"></i> +233 558 039 190</p>
+      <p><i class="fa fa-envelope"></i> adombaptistchurch.com</p>
+    </div>
+    <div>
+      <h6><strong>Choir Practice</strong></h6>
+      <p>Tuesdays, Thursdays & Saturdays @ 7:00 PM</p>
+    </div>
+    <div>
+      <h6><strong>Services</strong></h6>
+      <p>Sunday School: 9:30 AM - 10:30 AM</p>
+      <p>Sunday Morning Worship: 9:30 AM - 10:30 AM</p>
+      <p>Sunday Evening Service: 7:00 PM</p>
+      <p>Midweek(Wednesdays) Prayer Service: 7:00 PM</p>
+      <p>Bible Studies (Fridays): 7:00 PM</p>
+    </div>
+    <div>
+      <h6><strong>Social Media</strong></h6>
+      <div class="mt-2">
+            <!-- Facebook (default white) -->
+            <a href="https://web.facebook.com/profile.php?id=61566941171883" target="_blank" class="me-2" style="color: rgb(17, 27, 131);">
+              <i class="fa-brands fa-facebook"></i>
+            </a
+
+            <!-- YouTube (red) -->
+            <a href="https://www.youtube.com/@realmindxgh" target="_blank" class="me-2" style="color: red;">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+
+            <!-- WhatsApp (green) -->
+            <a href="https://wa.link/d6x888" target="_blank" class="me-2" style="color: #25D366;">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+              <span>@adombaptistchurch</span>
+          </div>
+    </div>
+  </div>
+  <div class="text-center mt-3">
+    <small id="copyright"></small>
+  </div>
+</footer>
+<a href="https://wa.me/233544638351" class="whatsapp-float" target="_blank" style="position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease-in-out;">
+    <img src="{{ url_for('static', filename='images/whatsapp.png') }}" alt="WhatsApp" width="60">
+</a>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const year = new Date().getFullYear();
+    document.getElementById("copyright").textContent = `© ${year} Adom Baptist Church. All rights reserved.`;
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

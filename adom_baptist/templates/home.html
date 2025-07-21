@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+
+{% block title %}Home | Adom Baptist{% endblock %}
+
+{% block content %}
+  <div class="container mt-5 text-center" style="color: #0C2E60;">
+    <h1>Welcome to Adom Baptist Church</h1>
+    <h5>We're glad you're here!</h5>
+
+    <hr class="my-4" />
+
+    <div class="mt-5">
+      <h3 class="mb-4">Our Weekly Services</h3>
+      <div class="row justify-content-center">
+        <!-- Sunday School -->
+        <div class="col-md-5 col-lg-4 mb-4">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fa fa-book me-2"></i>Sunday School</h5>
+              <p class="card-text">Every Sunday at 9:30 AM - 10:30 AM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sunday Worship -->
+        <div class="col-md-5 col-lg-4 mb-4">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fa fa-church me-2"></i>Sunday Morning Worship</h5>
+              <p class="card-text">Every Sunday at 10:30 AM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Midweek Prayer -->
+        <div class="col-md-5 col-lg-4 mb-4">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fa fa-praying-hands me-2"></i>Midweek Prayer Service</h5>
+              <p class="card-text">Wednesdays at 7:00 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Youth Fellowship -->
+        <div class="col-md-5 col-lg-4 mb-4">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fa fa-users me-2"></i>Bible Studies</h5>
+              <p class="card-text">Fridays at 7:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
