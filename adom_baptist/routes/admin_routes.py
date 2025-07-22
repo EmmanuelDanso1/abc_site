@@ -71,3 +71,8 @@ def delete_admin_profile_pic():
         flash('Profile picture deleted.', 'info')
 
     return redirect(url_for('admin.admin_dashboard'))
+
+@admin_bp.route('/settings', methods=['GET'])
+@login_required
+def settings():
+    return render_template('admin/settings.html')

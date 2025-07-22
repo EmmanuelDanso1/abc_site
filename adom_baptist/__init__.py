@@ -3,15 +3,22 @@ from dotenv import load_dotenv
 from flask_login import LoginManager
 from adom_baptist.models import Admin
 import os
-from extensions import db, migrate, mail 
+from flask_bcrypt import Bcrypt
+from itsdangerous import URLSafeTimedSerializer
+from extensions import db, migrate, mail
+from flask_wtf import CSRFProtect 
 
 # Load environment variables
 load_dotenv()
-
+csrf = CSRFProtect()
 login_manager = LoginManager()
+# Optional: serializer instance for password reset
+serializer = URLSafeTimedSerializer(os.getenv("SECRET_KEY"))
 def create_app():
     app = Flask(__name__)
 
+    # csrf token
+    csrf.init_app(app)
     # mail config
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
     app.config['MAIL_PORT'] = 587
@@ -20,6 +27,8 @@ def create_app():
     app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
     app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+    app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
+    app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB max
     
     # Load config
     app.config.from_object('config.Config')
