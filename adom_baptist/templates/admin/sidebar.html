@@ -1,0 +1,41 @@
+<style>/* icons and text change */
+  #sidebar .accordion-button span,
+  #sidebar .accordion-button i {
+  color: #0C2E60 !important;
+  }</style>
+<nav id="sidebar">
+  <div class="accordion" id="adminAccordion">
+    <!-- Info admin + sidebar -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="infoHeading">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#infoCollapse" aria-expanded="false" aria-controls="infoCollapse">
+          <i class="fas fa-info-circle me-2"></i> <span>Resources Info</span>
+        </button>
+      </h2>
+      <div id="infoCollapse" class="accordion-collapse collapse" aria-labelledby="infoHeading" data-bs-parent="#adminAccordion">
+        <div class="accordion-body px-0">
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-upload"></i> <span>Upload Info</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-cogs"></i> <span>Manage Info</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Settings -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="settingsHeading">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#settingsCollapse" aria-expanded="false" aria-controls="settingsCollapse">
+          <i class="fas fa-cog me-2"></i> <span>Settings</span>
+        </button>
+      </h2>
+      <div id="settingsCollapse" class="accordion-collapse collapse" aria-labelledby="settingsHeading" data-bs-parent="#adminAccordion">
+        <div class="accordion-body px-0">
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- End accordion -->
+</nav>
