@@ -1,0 +1,28 @@
+{% extends 'admin/base_admin.html' %}
+{% block title %}Upload Sermon{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-center">Upload Sermon</h2>
+  <form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.title.label }} {{ form.title(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.preacher.label }} {{ form.preacher(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.created_at.label }} {{ form.created_at(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.description.label }} {{ form.description(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.audio_file.label }} {{ form.audio_file(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
+  </form>
+</div>
+{% endblock %}

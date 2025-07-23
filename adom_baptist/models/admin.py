@@ -6,7 +6,6 @@ from datetime import datetime
 
 from extensions import db
 
-# models/admin.py
 class Admin(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
@@ -14,6 +13,8 @@ class Admin(UserMixin, db.Model):
     password = db.Column(db.String(255), nullable=False)
     profile_pic = db.Column(db.String(255), nullable=True)
     
+    # relationship between admin and sermon
+    sermons = db.relationship('Sermon', backref='admin', lazy=True)
 
     def __repr__(self):
         return f"<Admin {self.username}>"

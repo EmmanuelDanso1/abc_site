@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{% block title %}{{ sermon.title }}{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2>{{ sermon.title }}</h2>
+  <p><strong>Preacher:</strong> {{ sermon.preacher }}</p>
+  <p><strong>Date:</strong> {{ sermon.created_at.strftime('%B %d, %Y') }}</p>
+  <audio controls class="w-100 mt-3">
+    <source src="{{ url_for('static', filename='uploads/sermons/' ~ sermon.audio_file) }}" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
+{% endblock %}

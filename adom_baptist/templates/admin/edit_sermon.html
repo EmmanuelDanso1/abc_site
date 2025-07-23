@@ -1,0 +1,28 @@
+{% extends 'admin/base_admin.html' %}
+{% block title %}Edit Sermon{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center" style="color: #0C2E60;">Edit Sermon</h2>
+  <form method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input type="text" name="title" class="form-control" value="{{ sermon.title }}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Preacher</label>
+      <input type="text" name="preacher" class="form-control" value="{{ sermon.preacher }}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Date Preached</label>
+      <input type="date" name="created_at" class="form-control" value="{{ sermon.created_at.strftime('%Y-%m-%d') if sermon.created_at else '' }}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea name="description" class="form-control">{{ sermon.description }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="{{ url_for('admin.manage_sermons') }}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

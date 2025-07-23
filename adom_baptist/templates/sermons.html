@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+{% block title %}Sermons{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-center" style="color: #0C2E60;"> Sermons</h2>
+
+  <form class="row g-3 mb-4" method="GET">
+    <div class="col-md-5">
+      <input type="text" name="preacher" class="form-control" placeholder="Search by preacher" value="{{ request.args.get('preacher', '') }}">
+    </div>
+    <div class="col-md-4">
+      <input type="date" name="date" class="form-control" value="{{ request.args.get('date', '') }}">
+    </div>
+    <div class="col-md-3">
+      <button type="submit" class="btn btn-primary w-100">Filter</button>
+    </div>
+  </form>
+
+  {% for sermon in sermons %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ sermon.title }}</h5>
+        <p class="card-text">Preacher: {{ sermon.preacher }} | Date: {{ sermon.created_at.strftime('%Y-%m-%d') }}</p>
+        <a href="{{ url_for('main.sermon_playback', sermon_id=sermon.id) }}" class="btn btn-outline-success">Listen</a>
+      </div>
+    </div>
+  {% else %}
+    <p>No sermons found.</p>
+  {% endfor %}
+</div>
+{% endblock %}
