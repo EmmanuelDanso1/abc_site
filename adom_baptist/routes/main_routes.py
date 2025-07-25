@@ -9,6 +9,9 @@ main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
 def home():
+    if current_user.is_authenticated and current_user.is_admin:
+        # Redirect admin to the member dashboard
+        return redirect(url_for('admin.manage_members'))  # or your renamed route
     return render_template('home.html')
 
 @main_bp.route('/contact')

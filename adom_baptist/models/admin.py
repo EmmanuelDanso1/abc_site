@@ -13,9 +13,9 @@ class Admin(UserMixin, db.Model):
     password = db.Column(db.String(255), nullable=False)
     profile_pic = db.Column(db.String(255), nullable=True)
     
-    # relationship between admin and sermon
+    # relationship between admin and sermon, members
     sermons = db.relationship('Sermon', backref='admin', lazy=True)
-
+    members = db.relationship('Member', back_populates='admin', cascade="all, delete-orphan")   
     def __repr__(self):
         return f"<Admin {self.username}>"
     

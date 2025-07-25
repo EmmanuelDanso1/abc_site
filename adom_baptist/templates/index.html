@@ -26,12 +26,18 @@
       </div>
     </a>
     <div class="d-flex align-items-center ms-auto" style="color: #0C2E60;">
-      <a href="{{ url_for('main.home') }}" class="btn btn-outline-primary me-3"><i></i>Home</a>
-      <a href="#" class="btn btn-outline-primary me-3"><i></i>About</a>
-      <a href="{{ url_for('main.sermons') }}" class="btn btn-outline-primary me-3"><i></i>Sermon</a>
-      <a href="{{ url_for('main.contact') }}" class="btn btn-outline-primary me-3"><i></i>Contact</a>
+      {% if current_user.is_authenticated and current_user.is_admin %}
+        <a href="{{ url_for('admin.manage_members') }}" class="btn btn-outline-primary me-3">Dashboard</a>
+      {% else %}
+        <a href="{{ url_for('main.home') }}" class="btn btn-outline-primary me-3">Home</a>
+      {% endif %}
+    
+      <a href="#" class="btn btn-outline-primary me-3">About</a>
+      <a href="{{ url_for('main.sermons') }}" class="btn btn-outline-primary me-3">Sermon</a>
+      <a href="{{ url_for('main.contact') }}" class="btn btn-outline-primary me-3">Contact</a>
     </div>
   </div>
+
 </nav>     
 
 <!-- Main Content -->

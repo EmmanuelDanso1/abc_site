@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, session, redirect, url_for,jsonify
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 # using the imports from __init__.py file
-from adom_baptist.models import Admin, Sermon
-from adom_baptist.forms import SermonForm
+from adom_baptist.models import Admin, Sermon, Member
+from adom_baptist.forms import SermonForm, MemberForm
 from adom_baptist import db, mail
 from flask_mail import Message
 from flask_wtf.csrf import generate_csrf,validate_csrf, CSRFError
@@ -158,3 +158,72 @@ def delete_sermon(sermon_id):
     return redirect(url_for('admin.manage_sermons'))
 
 
+# member management
+@admin_bp.route('/members/manage')
+@login_required
+def manage_members():
+    filter_status = request.args.get('status')
+    query = Member.query
+    if filter_status:
+        query = query.filter_by(membership_status=filter_status)
+    members = query.order_by(Member.full_name).all()
+
+    # Totals and card
+    total_active = Member.query.filter_by(is_active=True).count()
+    total_inactive = Member.query.filter_by(is_active=False).count()
+    total_baptised = Member.query.filter_by(membership_status='Baptised').count()
+    total_not_baptised = Member.query.filter_by(membership_status='Not Baptised').count()
+    total_visitors = Member.query.filter_by(membership_status='Visitor').count()
+
+
+    return render_template('admin/manage_members.html',
+                           members=members,
+                           total_active=total_active,
+                           total_inactive=total_inactive,
+                           total_baptised=total_baptised,
+                           total_not_baptised=total_not_baptised,
+                           total_visitors=total_visitors)
+
+
+@admin_bp.route('/admin/members/create', methods=['GET', 'POST'])
+@login_required
+def create_member():
+    form = MemberForm()
+    if form.validate_on_submit():
+        member = Member(
+            full_name=form.full_name.data,
+            email=form.email.data,
+            phone=form.phone.data,
+            address=form.address.data,
+            date_of_birth=form.date_of_birth.data,
+            gender=form.gender.data,
+            membership_status=form.membership_status.data,
+            is_active=form.is_active.data,
+            admin_id=current_user.id
+        )
+        db.session.add(member)
+        db.session.commit()
+        flash('Member created successfully.', 'success')
+        return redirect(url_for('admin.manage_members'))
+    return render_template('admin/member_form.html', form=form, title='Add Member')
+
+@admin_bp.route('/admin/members/<int:member_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_member(member_id):
+    member = Member.query.get_or_404(member_id)
+    form = MemberForm(obj=member)
+    if form.validate_on_submit():
+        form.populate_obj(member)
+        db.session.commit()
+        flash('Member updated successfully.', 'success')
+        return redirect(url_for('admin.manage_members'))
+    return render_template('admin/member_form.html', form=form, title='Edit Member')
+
+@admin_bp.route('/admin/members/<int:member_id>/delete', methods=['POST'])
+@login_required
+def delete_member(member_id):
+    member = Member.query.get_or_404(member_id)
+    db.session.delete(member)
+    db.session.commit()
+    flash('Member deleted.', 'success')
+    return redirect(url_for('admin.manage_members'))
